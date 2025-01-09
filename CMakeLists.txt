@@ -20,6 +20,12 @@ if(APPLE)
         ${AVFOUNDATION_FRAMEWORK} 
         ${COREMEDIA_FRAMEWORK}
     )
+elseif(WIN32)
+    target_sources(dragdropwrapper
+    PRIVATE
+        ./dragdropwrapper/dragdropwrapper_win.cpp
+    )
+elseif(UNIX)
 
 endif()
 
