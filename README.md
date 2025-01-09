@@ -73,8 +73,7 @@ The suggested workflow to use this library is to:
 
 
 # Important Notes:
-`SendFileAsDragDrop` is a blocking function, so it might be a good idea to run this on it's own thread (`std::thread`), or asynchronously, however you prefer to do that.
-  - I know this kinda defeats the point of a callback argument but whatever.
+`SendFileAsDragDrop` is a blocking function.
 
 On MacOS the window handle is mandatory:
   - The window handle should be your program's [NSWindow](https://developer.apple.com/documentation/appkit/nswindow) handle.
