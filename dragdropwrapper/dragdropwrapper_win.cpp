@@ -227,7 +227,10 @@ extern "C" {
         if (hr == DRAGDROP_S_DROP)
         {
             // Handle successful drop if needed
-            std::cout << "File dropped successfully on Windows!" << std::endl;
+            // std::cout << "File dropped successfully on Windows!" << std::endl;
+
+            if (callback)
+                callback();
         }
 
         // Cleanup
@@ -236,10 +239,6 @@ extern "C" {
 
         OleUninitialize();
 
-        GlobalFree(hDrop);
-
-        // Call the provided callback
-        if (callback)
-            callback();
+        GlobalFree(hDrop);   
     }
 }

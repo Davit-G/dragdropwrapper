@@ -25,7 +25,7 @@
 
 // Call this method when the dragging operation is done
 - (void)draggingSession:(NSDraggingSession *)session endedAtPoint:(NSPoint)screenPoint operation:(NSDragOperation)operation {
-    NSLog(@"Drag session ended at: (%f, %f) with operation: %ld", screenPoint.x, screenPoint.y, (long)operation);
+    // NSLog(@"Drag session ended at: (%f, %f) with operation: %ld", screenPoint.x, screenPoint.y, (long)operation);
     if (self.callback) {
         self.callback();
     }
