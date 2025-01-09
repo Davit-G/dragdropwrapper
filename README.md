@@ -4,6 +4,7 @@ dragdropwrapper is a lightweight C++ library with one mission: arbitrarily trigg
 
 # Notes
 - This is a small static library that I want to use on my own projects with CMake, so expect a bit of jank.
+- It is blocking.
 - Since I use it for my own projects don't expect all systems to behave correctly.
 - If you'd like to use it too feel free but this code could be prone to issues and bugs, I tried my best 🤷
 
