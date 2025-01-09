@@ -7,6 +7,8 @@ dragdropwrapper is a lightweight C++ library with one mission: arbitrarily trigg
 - Since I use it for my own projects don't expect all systems to behave correctly.
 - If you'd like to use it too feel free but this code could be prone to issues and bugs, I tried my best 🤷
 
+I plan to add a bit of basic error handling.
+
 ## OS Support
 
 dragdropwrapper should be able to support:
@@ -55,19 +57,24 @@ You will now have access to a convenient method, `SendFileAsDragDrop`.
 ```c++
 void SendFileAsDragDrop(void* handle, const char* file_path, std::function<void(void)> callback);
 ```
-
-The first parameter is a window handle, which is only mandatory on MacOS. On Windows the handle argument doesn't get used, so feel free to pass a `nullptr`.
-The second argument takes an absolute file path which is the target file you want to call a system file drag with.
-The third parameter is a callback function that you can run after it's successfully finished dragging.
-
-# Usage / Important:
-`SendFileAsDragDrop` is a blocking function, so it might be a good idea to run this on it's own thread (`std::thread`), or asynchronously, however you prefer to do that.
-  - I know this kinda defeats the point of a callback argument but whatever.
+Arguments:
+- `void* handle`:
+    - Window handle (On Mac this is a NSWindow). On Windows the handle argument doesn't get used, so feel free to pass a nullptr.
+- `const char* file_path`:
+    - An absolute file path which is the target file you want to call a system file drag with.
+- `std::function<void(void)> callback`:
+    - Callback function that you can run after it's successfully finished dragging.
 
 The suggested workflow to use this library is to:
 - Capture a mouse drag event from your program / gui library / component
 - Save the data you want to drag and drop as a file and store it's absolute path.
 - Then, provide that path to `SendFileAsDragDrop` on a separate thread (to avoid blocking your code).
+
+
+
+# Important Notes:
+`SendFileAsDragDrop` is a blocking function, so it might be a good idea to run this on it's own thread (`std::thread`), or asynchronously, however you prefer to do that.
+  - I know this kinda defeats the point of a callback argument but whatever.
 
 On MacOS the window handle is mandatory:
   - The window handle should be your program's [NSWindow](https://developer.apple.com/documentation/appkit/nswindow) handle.
