@@ -7,7 +7,7 @@ cmake-build-debug
 .git
 JUCE
 
-.xcodeproj
+*.xcodeproj
 
 *.bat
 
