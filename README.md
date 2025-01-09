@@ -60,14 +60,21 @@ The first parameter is a window handle, which is only mandatory on MacOS. On Win
 The second argument takes an absolute file path which is the target file you want to call a system file drag with.
 The third parameter is a callback function that you can run after it's successfully finished dragging.
 
-# Important:
-- `SendFileAsDragDrop` is a blocking function, so it might be a good idea to run this on it's own thread (`std::thread`), or asynchronously, however you prefer to do that.
+# Usage / Important:
+`SendFileAsDragDrop` is a blocking function, so it might be a good idea to run this on it's own thread (`std::thread`), or asynchronously, however you prefer to do that.
   - I know this kinda defeats the point of a callback argument but whatever.
-- On MacOS the window handle is mandatory:
+
+The suggested workflow to use this library is to:
+- Capture a mouse drag event from your program / gui library / component
+- Save the data you want to drag and drop as a file and store it's absolute path.
+- Then, provide that path to `SendFileAsDragDrop` on a separate thread (to avoid blocking your code).
+
+On MacOS the window handle is mandatory:
   - The window handle should be your program's [NSWindow](https://developer.apple.com/documentation/appkit/nswindow) handle.
   - If you are creating your own NSWindow you can pass the window handle directly, but if you are using a graphics library such as JUCE, raylib, etc, you might be able to grab a window handle from it.
     - For example, Raylib has a convenient method [GetWindowHandle()](https://www.raylib.com/cheatsheet/cheatsheet.html) which does this exact operation.
-- SendFileAsDragDrop does not currently support arbitrary text / images or other assets yet, this could be in the works in the future.
+
+SendFileAsDragDrop does not currently support arbitrary text / images or other assets yet, this could be in the works in the future.
 
 ## Contribution
 This repository is the most boring thing I've written, if you'd like to contribute fixes or patches (please do 😅), then submit an issue or a pull request.
